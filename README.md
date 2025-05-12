@@ -7,4 +7,5 @@
 * install docker or mysql
 * run `docker compose up` when docker installed
 * run `composer install`
+* run migration `php artisan migrate`
 * run `composer run dev`
