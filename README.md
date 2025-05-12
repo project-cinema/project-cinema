@@ -10,4 +10,5 @@
 * copy .env.example tp .env
 * run `php artisan key:generate`
 * run migration `php artisan migrate`
+* run `npm install`
 * run `composer run dev`
