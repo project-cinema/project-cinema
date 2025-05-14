@@ -12,6 +12,9 @@
 
 ### ubuntu
 
+* get token 
+  * https://github.com/settings/tokens
+* run script
 ```bash
 sh setup.sh
 ```
