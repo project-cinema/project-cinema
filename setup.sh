@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -ue
 
 # install php
 sudo apt update
