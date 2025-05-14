@@ -26,7 +26,7 @@ fi
 composer install
 
 # copy .env
-cp ./.env.sample ./.env
+cp ./.env.sxample ./.env
 
 # gen key
 php artisan key:generate
