@@ -2,11 +2,11 @@
 set -ue
 
 # install php
-if ! docker -v &> /dev/null; then
+if ! php -v &> /dev/null; then
     sudo apt update
     sudo apt install php-common php-cli php-mbstring  php-dom php-mysql php-pdo -y
 fi
-if ! docker -v &> /dev/null; then
+if ! composer -v &> /dev/null; then
     sudo apt update
     sudo apt install composer -y
 fi
