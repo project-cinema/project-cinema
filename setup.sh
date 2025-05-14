@@ -47,4 +47,5 @@ read -r TEMP
 # migrate db
 ./vendor/bin/sail artisan migrate
 
-echo execute idea back task
+echo execute idea front task
+echo forwerd 8000 and 5173 port
