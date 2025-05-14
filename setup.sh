@@ -37,15 +37,4 @@ cp ./.env.example ./.env
 # gen key
 php artisan key:generate
 
-
-echo execute idea back task
-# shellcheck disable=SC2034
-read -r TEMP
-
-# npm install
-./vendor/bin/sail npm install
-# migrate db
-./vendor/bin/sail artisan migrate
-
-echo execute idea front task
-echo forwerd 8000 and 5173 port
+sudo gpasswd -a docker ${USER}
