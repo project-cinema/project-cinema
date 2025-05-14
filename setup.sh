@@ -31,11 +31,9 @@ cp ./.env.sample ./.env
 # gen key
 php artisan key:generate
 
-# bpm install
-npm install
 
 echo execute idea back task
-read
+read -r TEMP
 
 # npm install
 ./vendor/bin/sail npm install
