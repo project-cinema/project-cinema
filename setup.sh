@@ -26,13 +26,14 @@ fi
 composer install
 
 # copy .env
-cp ./.env.sxample ./.env
+cp ./.env.example ./.env
 
 # gen key
 php artisan key:generate
 
 
 echo execute idea back task
+# shellcheck disable=SC2034
 read -r TEMP
 
 # npm install
