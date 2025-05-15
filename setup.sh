@@ -83,7 +83,7 @@ setup_laravel() {
     if [ ! -f "composer.json" ]; then
         log_error "composer.json not found. Are you in the correct directory?"
         exit 1
-    }
+    fi
 
     composer install
 
@@ -100,7 +100,7 @@ setup_laravel() {
 # Add current user to docker group
 setup_docker_permissions() {
     log_info "Adding current user to docker group..."
-    sudo gpasswd -a docker "${USER}"
+    sudo gpasswd -a "${USER}" docker
     log_info "Please log out and back in for the group changes to take effect"
 }
 
@@ -112,3 +112,4 @@ install_docker
 setup_laravel
 setup_docker_permissions
 log_info "Setup completed successfully"
+log_info "You need to restart IDE"

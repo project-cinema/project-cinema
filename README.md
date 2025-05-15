@@ -21,7 +21,7 @@
 * run script
 
 ```bash
-sh setup.sh
+bash setup.sh
 ```
 
 * execute idea back task
