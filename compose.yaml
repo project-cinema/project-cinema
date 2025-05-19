@@ -7,4 +7,5 @@ services:
       - 'MARIADB_ROOT_PASSWORD=verysecret'
       - 'MARIADB_USER=myuser'
     ports:
-      - '3306'
+      - published: 3306
+        target: 3306
