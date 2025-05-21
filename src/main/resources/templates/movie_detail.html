@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HALシネマ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#D4AF37', // 金色
+            secondary: '#C0A030', // 深い金色
+            accent: '#FFD700', // 明るい金色
+            dark: '#0A0A0A', // ほぼ黒
+            'dark-secondary': '#1A1A1A', // 少し明るい黒
+            'text-light': '#E0E0E0', // 明るいテキスト
+          },
+          fontFamily: {
+            playfair: ['Playfair Display', 'serif'],
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Gold gradient text */
+    .gold-gradient {
+      background: linear-gradient(to right, #D4AF37, #FFD700, #D4AF37);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* Navigation link styles */
+    .nav-link {
+      color: #E0E0E0;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .nav-link:hover {
+      color: #D4AF37;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #D4AF37, #FFD700, #D4AF37);
+      bottom: -5px;
+      left: 0;
+      transition: all 0.3s;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Button styles */
+    .button-primary {
+      background-color: #D4AF37;
+      color: #0A0A0A;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+    }
+    
+    .button-primary:hover {
+      background-color: #FFD700;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Movie card styles */
+    .movie-card {
+      background-color: #1A1A1A;
+      overflow: hidden;
+      transition: all 0.3s;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      position: relative;
+    }
+    
+    .movie-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    
+    .movie-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(to right, #D4AF37, #FFD700, #D4AF37);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+      transform-origin: left;
+    }
+    
+    .movie-card:hover::after {
+      transform: scaleX(1);
+    }
+    
+    /* Tag styles */
+    .tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.25rem 0.625rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #0A0A0A;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+    
+    /* Section title styles */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: #D4AF37;
+      position: relative;
+      padding-left: 1.25rem;
+    }
+    
+    .section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 15%;
+      height: 70%;
+      width: 4px;
+      background: linear-gradient(to bottom, #D4AF37, #FFD700);
+    }
+    
+    /* Footer link styles */
+    .footer-link {
+      color: #E0E0E0;
+      opacity: 0.6;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: all 0.3s;
+      display: block;
+    }
+    
+    .footer-link:hover {
+      color: #D4AF37;
+      transform: translateX(4px);
+    }
+    
+    /* Active slide indicator */
+    .active-slide {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+  </style>
+</head>
+<body class="bg-dark text-text-light font-poppins leading-relaxed">
+
+  
+    <!-- フッター -->
+    <footer class="bg-dark-secondary py-10 border-t border-primary border-opacity-20 text-sm">
+      <div class="max-w-screen-xl mx-auto px-[5%] grid grid-cols-2 sm:grid-cols-4 gap-6">
+        <div>
+          <h4 class="text-primary font-semibold mb-4 uppercase tracking-wider">HALシネマ</h4>
+          <p class="opacity-70 leading-relaxed">
+            名作とともに時代を超える体験を。<br>
+            HALシネマはあなたに最高の映画体験を提供します。
+          </p>
+        </div>
+        <div>
+          <h4 class="text-primary font-semibold mb-4 uppercase tracking-wider">リンク</h4>
+          <a href="#" class="footer-link">館内マップ</a>
+          <a href="#" class="footer-link">上映中作品</a>
+          <a href="#" class="footer-link">公開予定</a>
+          <a href="#" class="footer-link">料金案内</a>
+        </div>
+        <div>
+          <h4 class="text-primary font-semibold mb-4 uppercase tracking-wider">サポート</h4>
+          <a href="#" class="footer-link">お問い合わせ</a>
+          <a href="#" class="footer-link">プライバシーポリシー</a>
+          <a href="#" class="footer-link">利用規約</a>
+        </div>
+        <div>
+          <h4 class="text-primary font-semibold mb-4 uppercase tracking-wider">SNS</h4>
+          <a href="#" class="footer-link">Twitter</a>
+          <a href="#" class="footer-link">Instagram</a>
+          <a href="#" class="footer-link">Facebook</a>
+        </div>
+      </div>
+      <div class="text-center text-xs mt-10 opacity-50">&copy; 2025 HAL Cinema. All rights reserved.</div>
+    </footer>
+  
+    <script>
+      // フロア切り替え処理
+      const floorMap = document.getElementById('floorMap');
+      const floor1Btn = document.getElementById('floor1Btn');
+      const floor2Btn = document.getElementById('floor2Btn');
+  
+      floor1Btn.addEventListener('click', () => {
+        floorMap.src = 'floor1.png';
+        floor1Btn.classList.add('active-slide');
+        floor2Btn.classList.remove('active-slide');
+      });
+  
+      floor2Btn.addEventListener('click', () => {
+        floorMap.src = 'floor2.png';
+        floor2Btn.classList.add('active-slide');
+        floor1Btn.classList.remove('active-slide');
+      });
+    </script>
+  </body>
+  
+  
+
+</html>

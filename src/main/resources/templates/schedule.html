@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>上映スケジュール - HALシネマ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#D4AF37',
+            dark: '#0A0A0A',
+            darkgray: '#1A1A1A'
+          },
+          fontFamily: {
+            sans: ['Noto Sans JP', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0A0A0A;
+      color: #FFFFFF;
+    }
+    .movie-time {
+      width: 152px;
+      height: 72px;
+      border: 1px solid #D4AF37;
+    }
+    .schedule-date {
+      width: 152px;
+      height: 40px;
+      border: 1px solid #D4AF37;
+    }
+    .active-date {
+      background-color: #D4AF37;
+      color: #0A0A0A;
+    }
+  </style>
+</head>
+<body class="font-sans">
+  <!-- ヘッダー -->
+  <header class="bg-dark text-white py-4 border-b border-gold">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+      <div class="text-gold font-bold text-2xl">HALシネマ</div>
+      <nav>
+        <ul class="flex space-x-6 text-sm">
+          <li><a href="#" class="hover:text-gold">HOME</a></li>
+          <li><a href="#" class="hover:text-gold">上映中</a></li>
+          <li><a href="#" class="hover:text-gold">上映予定</a></li>
+          <li><a href="#" class="text-gold">上映スケジュール</a></li>
+          <li><a href="#" class="hover:text-gold">料金</a></li>
+        </ul>
+      </nav>
+      <button class="bg-gold text-dark px-4 py-2 rounded text-sm font-bold">チケット予約</button>
+    </div>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl font-bold text-gold mb-8">上映スケジュール</h1>
+    
+    <!-- 日付選択タブ -->
+    <div class="flex mb-8">
+      <div class="schedule-date active-date flex items-center justify-center font-bold">本日</div>
+      <div class="schedule-date flex items-center justify-center">5/8(水)</div>
+      <div class="schedule-date flex items-center justify-center">5/9(木)</div>
+      <div class="schedule-date flex items-center justify-center">5/10(金)</div>
+      <div class="schedule-date flex items-center justify-center">5/11(土)</div>
+      <div class="schedule-date flex items-center justify-center">5/12(日)</div>
+    </div>
+    
+    <!-- 映画スケジュール -->
+    <div class="space-y-6">
+      <!-- 映画1 -->
+      <div>
+        <div class="flex items-center mb-2">
+          <div class="w-16 h-20 bg-gold mr-4"></div>
+          <div>
+            <h3 class="text-lg font-bold">ワンダフルライフ</h3>
+            <p class="text-xs text-gray-400">上映時間: 120分</p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-8 gap-0">
+          <!-- 1行目 -->
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">10:00-12:00</span>
+            <span class="text-xs text-gold">残席：10席</span>
+            <span class="text-xs">スクリーン1</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">12:30-14:30</span>
+            <span class="text-xs text-gold">残席：5席</span>
+            <span class="text-xs">スクリーン1</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">15:00-17:00</span>
+            <span class="text-xs text-gold">残席：15席</span>
+            <span class="text-xs">スクリーン1</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">15:00-17:00</span>
+            <span class="text-xs text-gold">残席：15席</span>
+            <span class="text-xs">スクリーン1</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">15:00-17:00</span>
+            <span class="text-xs text-gold">残席：15席</span>
+            <span class="text-xs">スクリーン1</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">15:00-17:00</span>
+            <span class="text-xs text-gold">残席：15席</span>
+            <span class="text-xs">スクリーン1</span>
+          </div>
+          <!-- 2行目 -->
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">17:30-19:30</span>
+            <span class="text-xs text-gold">残席：20席</span>
+            <span class="text-xs">スクリーン1</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">17:30-19:30</span>
+            <span class="text-xs text-gold">残席：20席</span>
+            <span class="text-xs">スクリーン1</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 映画2 -->
+      <div>
+        <div class="flex items-center mb-2">
+          <div class="w-16 h-20 bg-green-700 mr-4"></div>
+          <div>
+            <h3 class="text-lg font-bold">アクションマスター</h3>
+            <p class="text-xs text-gray-400">上映時間: 95分</p>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-8 gap-0">
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">10:00-11:35</span>
+            <span class="text-xs text-gold">残席：8席</span>
+            <span class="text-xs">スクリーン2</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">12:00-13:35</span>
+            <span class="text-xs text-gold">残席：12席</span>
+            <span class="text-xs">スクリーン2</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">14:00-15:35</span>
+            <span class="text-xs text-gold">残席：3席</span>
+            <span class="text-xs">スクリーン2</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">14:00-15:35</span>
+            <span class="text-xs text-gold">残席：3席</span>
+            <span class="text-xs">スクリーン2</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">14:00-15:35</span>
+            <span class="text-xs text-gold">残席：3席</span>
+            <span class="text-xs">スクリーン2</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">14:00-15:35</span>
+            <span class="text-xs text-gold">残席：3席</span>
+            <span class="text-xs">スクリーン2</span>
+          </div>
+          <!-- 2行目 -->
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">16:00-17:35</span>
+            <span class="text-xs text-gold">残席：15席</span>
+            <span class="text-xs">スクリーン2</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+        </div>
+      </div>
+      
+      <!-- 映画3 -->
+      <div>
+        <div class="flex items-center mb-2">
+          <div class="w-16 h-20 bg-red-800 mr-4"></div>
+          <div>
+            <h3 class="text-lg font-bold">ミステリアス</h3>
+            <p class="text-xs text-gray-400">上映時間: 110分</p>
+          </div>
+        </div>
+        
+        <div class="grid grid-cols-8 gap-0">
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">11:00-12:50</span>
+            <span class="text-xs text-gold">残席：22席</span>
+            <span class="text-xs">スクリーン3</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">13:30-15:20</span>
+            <span class="text-xs text-gold">残席：16席</span>
+            <span class="text-xs">スクリーン3</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">16:00-17:50</span>
+            <span class="text-xs text-gold">残席：7席</span>
+            <span class="text-xs">スクリーン3</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">16:00-17:50</span>
+            <span class="text-xs text-gold">残席：7席</span>
+            <span class="text-xs">スクリーン3</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">16:00-17:50</span>
+            <span class="text-xs text-gold">残席：7席</span>
+            <span class="text-xs">スクリーン3</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-gold">
+            <span class="text-sm text-dark font-bold">18:30-20:20</span>
+            <span class="text-xs text-dark font-bold">残席：2席</span>
+            <span class="text-xs text-dark">スクリーン3</span>
+          </div>
+          <!-- 2行目 -->
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">19:00-20:50</span>
+            <span class="text-xs text-gold">残席：9席</span>
+            <span class="text-xs">スクリーン3</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2">
+            <span class="text-sm">21:30-23:20</span>
+            <span class="text-xs text-gold">残席：23席</span>
+            <span class="text-xs">スクリーン3</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+          <div class="movie-time flex flex-col items-center justify-center p-2 bg-darkgray opacity-50">
+            <span class="text-sm">-</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <!-- フッター -->
+  <footer class="bg-dark border-t border-gold py-8 mt-12">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-4 gap-4 text-sm">
+        <div>
+          <h4 class="text-gold font-bold mb-3">HALシネマについて</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-gold">企業情報</a></li>
+            <li><a href="#" class="hover:text-gold">ニュース</a></li>
+            <li><a href="#" class="hover:text-gold">採用情報</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-gold font-bold mb-3">劇場案内</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-gold">東京シネマ</a></li>
+            <li><a href="#" class="hover:text-gold">大阪シネマ</a></li>
+            <li><a href="#" class="hover:text-gold">名古屋シネマ</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-gold font-bold mb-3">ご利用案内</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-gold">料金案内</a></li>
+            <li><a href="#" class="hover:text-gold">チケット購入方法</a></li>
+            <li><a href="#" class="hover:text-gold">よくある質問</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-gold font-bold mb-3">お問い合わせ</h4>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:text-gold">お問い合わせフォーム</a></li>
+            <li><a href="#" class="hover:text-gold">プライバシーポリシー</a></li>
+            <li><a href="#" class="hover:text-gold">特定商取引法に基づく表記</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="text-center mt-8 text-xs">
+        <p>&copy; 2025 HALシネマ All Rights Reserved.</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

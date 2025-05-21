@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>チケット購入完了 | HALシネマ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#D4AF37',
+            secondary: '#C0A030',
+            accent: '#FFD700',
+            dark: '#0A0A0A',
+            'dark-secondary': '#1A1A1A',
+            'text-light': '#E0E0E0',
+          },
+          fontFamily: {
+            playfair: ['Playfair Display', 'serif'],
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-dark text-text-light font-poppins leading-relaxed min-h-screen flex flex-col">
+
+  <!-- ヘッダー -->
+  <header class="bg-dark bg-opacity-98 text-text-light px-[5%] h-20 flex justify-between items-center sticky top-0 z-40 shadow-md border-b border-primary border-opacity-30">
+    <div class="font-playfair text-2xl font-bold tracking-wide gold-gradient flex items-center">
+      <span class="text-primary mr-2.5">🎬</span>
+      HALシネマ
+    </div>
+    <nav class="flex gap-8">
+      <a href="#" class="nav-link">上映中作品</a>
+      <a href="#" class="nav-link">公開予定</a>
+      <a href="#" class="nav-link">料金案内</a>
+      <a href="#" class="nav-link">サービス</a>
+    </nav>
+  </header>
+
+  <!-- メイン -->
+  <main class="flex-grow max-w-screen-md mx-auto px-[5%] py-24 text-center">
+    <h1 class="text-3xl md:text-4xl font-playfair font-bold text-primary mb-8">チケット購入が完了しました</h1>
+    <p class="text-lg mb-6 opacity-80">ご購入いただきありがとうございます。</p>
+    <div class="bg-dark-secondary border border-primary border-opacity-20 p-8 rounded-2xl shadow-lg">
+      <p class="text-lg mb-2">🎟️ 映画タイトル：<span class="font-semibold">すばらしい映画のタイトル</span></p>
+      <p class="text-lg mb-2">📍 劇場：<span class="font-semibold">東京シネマ</span></p>
+      <p class="text-lg mb-2">🗓️ 日時：<span class="font-semibold">2025年5月20日 (火) 18:30～</span></p>
+      <p class="text-lg mb-6">🪑 座席：<span class="font-semibold">A列 12番</span></p>
+      <div class="text-sm opacity-70 mb-4">
+        ※入場の際はQRコードまたは受付番号をご提示ください。
+      </div>
+      <button onclick="location.href='index.html'" class="mt-4 px-6 py-3 bg-primary text-black rounded-full font-bold uppercase hover:bg-yellow-400 transition">
+        トップに戻る
+      </button>
+    </div>
+  </main>
+
+  <!-- フッター -->
+  <footer class="bg-dark-secondary py-10 text-center text-sm text-gray-400 border-t border-primary border-opacity-20">
+    &copy; 2025 HAL Cinema. All rights reserved.
+  </footer>
+
+</body>
+</html>

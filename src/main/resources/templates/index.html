@@ -1,11 +1,571 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta content="width=device-width, initial-scale=1" name="viewport">
-        <title>Title</title>
-    </head>
-    <body>
-<p>aaaa</p>
-    </body>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HALシネマ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#D4AF37', // 金色
+            secondary: '#C0A030', // 深い金色
+            accent: '#FFD700', // 明るい金色
+            dark: '#0A0A0A', // ほぼ黒
+            'dark-secondary': '#1A1A1A', // 少し明るい黒
+            'text-light': '#E0E0E0', // 明るいテキスト
+          },
+          fontFamily: {
+            playfair: ['Playfair Display', 'serif'],
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Gold gradient text */
+    .gold-gradient {
+      background: linear-gradient(to right, #D4AF37, #FFD700, #D4AF37);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    
+    /* Navigation link styles */
+    .nav-link {
+      color: #E0E0E0;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      position: relative;
+      transition: all 0.3s;
+    }
+    
+    .nav-link:hover {
+      color: #D4AF37;
+    }
+    
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, #D4AF37, #FFD700, #D4AF37);
+      bottom: -5px;
+      left: 0;
+      transition: all 0.3s;
+    }
+    
+    .nav-link:hover::after {
+      width: 100%;
+    }
+    
+    /* Button styles */
+    .button-primary {
+      background-color: #D4AF37;
+      color: #0A0A0A;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+    }
+    
+    .button-primary:hover {
+      background-color: #FFD700;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Movie card styles */
+    .movie-card {
+      background-color: #1A1A1A;
+      overflow: hidden;
+      transition: all 0.3s;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.1);
+      position: relative;
+    }
+    
+    .movie-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+    
+    .movie-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(to right, #D4AF37, #FFD700, #D4AF37);
+      transform: scaleX(0);
+      transition: transform 0.3s;
+      transform-origin: left;
+    }
+    
+    .movie-card:hover::after {
+      transform: scaleX(1);
+    }
+    
+    /* Tag styles */
+    .tag {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      padding: 0.25rem 0.625rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #0A0A0A;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+    
+    /* Section title styles */
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.875rem;
+      font-weight: 700;
+      color: #D4AF37;
+      position: relative;
+      padding-left: 1.25rem;
+    }
+    
+    .section-title::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 15%;
+      height: 70%;
+      width: 4px;
+      background: linear-gradient(to bottom, #D4AF37, #FFD700);
+    }
+    
+    /* Footer link styles */
+    .footer-link {
+      color: #E0E0E0;
+      opacity: 0.6;
+      text-decoration: none;
+      font-size: 0.875rem;
+      transition: all 0.3s;
+      display: block;
+    }
+    
+    .footer-link:hover {
+      color: #D4AF37;
+      transform: translateX(4px);
+    }
+    
+    /* Active slide indicator */
+    .active-slide {
+      background-color: rgba(255, 255, 255, 0.8);
+    }
+  </style>
+</head>
+<body class="bg-dark text-text-light font-poppins leading-relaxed">
+  <!-- ヘッダー -->
+  <header class="bg-dark bg-opacity-98 text-text-light px-[5%] h-20 flex justify-between items-center sticky top-0 z-40 shadow-md border-b border-primary border-opacity-30">
+    <div class="font-playfair text-2xl font-bold tracking-wide gold-gradient flex items-center">
+      <span class="text-primary mr-2.5">📽️</span>
+      HALシネマ
+    </div>
+    <nav class="flex gap-8">
+      <a href="#" class="nav-link">上映中作品</a>
+      <a href="#" class="nav-link">公開予定</a>
+      <a href="#" class="nav-link">料金案内</a>
+      <a href="#" class="nav-link">サービス</a>
+    </nav>
+  </header>
+
+  <!-- トップバー -->
+  <div class="bg-dark-secondary flex justify-between items-center px-[5%] py-4 border-b border-primary border-opacity-20 flex-wrap">
+    <div class="relative w-56">
+      <select class="w-full py-3 px-4 border border-primary appearance-none bg-dark text-text-light cursor-pointer font-poppins text-sm transition-all duration-300 hover:border-accent hover:shadow-md">
+        <option value="">劇場を選択</option>
+        <option value="tokyo">東京シネマ</option>
+        <option value="osaka">大阪シネマ</option>
+        <option value="nagoya">名古屋シネマ</option>
+        <option value="fukuoka">福岡シネマ</option>
+      </select>
+    </div>
+    <div class="flex w-64">
+      <input class="flex-1 py-3 px-4 border border-primary border-r-0 font-poppins text-sm text-text-light bg-dark" type="text" placeholder="作品検索...">
+      <button class="w-12 bg-primary text-dark border-none cursor-pointer text-lg transition-all duration-300 hover:bg-accent">⌕</button>
+    </div>
+    <button class="button-primary py-3 px-6 text-sm">
+      <span class="mr-2">🎟️</span>チケット予約
+    </button>
+  </div>
+
+  <div class="max-w-screen-xl mx-auto px-[5%]">
+    <!-- スライダー -->
+    <div class="relative my-8 h-96 overflow-hidden shadow-xl">
+      <div class="bg-gradient-to-r from-dark to-dark-secondary h-full flex items-center justify-center text-3xl font-bold text-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-center bg-cover opacity-60" style="background-image: url('https://via.placeholder.com/1200x450')"></div>
+        <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-dark to-transparent"></div>
+        <div class="relative z-10 text-center p-5 font-playfair text-shadow">
+          過去の名作を<span class="gold-gradient">HALシネマ</span>で<br>
+          <span class="inline-block mt-4 py-1 px-4 border border-primary bg-dark bg-opacity-60 font-poppins">今週末グランドオープン</span>
+        </div>
+      </div>
+      <div class="absolute top-1/2 left-5 transform -translate-y-1/2 w-12 h-12 bg-dark bg-opacity-60 backdrop-blur border border-primary flex items-center justify-center cursor-pointer text-xl z-10 text-primary transition-all duration-300 hover:bg-primary hover:bg-opacity-20 hover:text-accent hover:border-accent">&#10094;</div>
+      <div class="absolute top-1/2 right-5 transform -translate-y-1/2 w-12 h-12 bg-dark bg-opacity-60 backdrop-blur border border-primary flex items-center justify-center cursor-pointer text-xl z-10 text-primary transition-all duration-300 hover:bg-primary hover:bg-opacity-20 hover:text-accent hover:border-accent">&#10095;</div>
+      <div class="absolute bottom-8 left-0 right-0 flex justify-center gap-3 z-10">
+        <div class="w-10 h-0.5 bg-white bg-opacity-30 cursor-pointer transition-all duration-300 active-slide"></div>
+        <div class="w-10 h-0.5 bg-white bg-opacity-30 cursor-pointer transition-all duration-300"></div>
+        <div class="w-10 h-0.5 bg-white bg-opacity-30 cursor-pointer transition-all duration-300"></div>
+        <div class="w-10 h-0.5 bg-white bg-opacity-30 cursor-pointer transition-all duration-300"></div>
+      </div>
+    </div>
+
+    <!-- プレミアセレクション -->
+    <div class="flex items-center justify-between my-16">
+      <h2 class="section-title">PREMIER SELECTION</h2>
+      <a href="#" class="text-primary font-semibold text-sm uppercase tracking-wider transition-all duration-300 border-b border-transparent pb-1 hover:text-accent hover:border-accent">すべて見る →</a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+      <!-- 映画カード1 -->
+      <div class="movie-card">
+        <div class="h-64 bg-dark-secondary relative overflow-hidden bg-center bg-cover" style="background-image: url('https://via.placeholder.com/220x300')">
+          <span class="tag bg-gradient-to-r from-primary to-accent">NEW</span>
+          <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-dark-secondary to-transparent"></div>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold my-1 text-lg leading-snug text-text-light font-playfair">すばらしい映画のタイトル</div>
+          <div class="text-sm text-text-light opacity-60 mb-4 flex items-center">
+            <span class="mr-1 text-xs">🕒</span>上映時間: 120分
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="inline-block bg-dark text-primary text-xs py-1 px-2.5 font-medium border border-primary uppercase tracking-wider">上映中</div>
+            <div class="flex items-center text-sm text-primary font-semibold">
+              <span class="mr-1 text-xs">⭐</span>4.8
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 映画カード2 -->
+      <div class="movie-card">
+        <div class="h-64 bg-dark-secondary relative overflow-hidden bg-center bg-cover" style="background-image: url('https://via.placeholder.com/220x300')">
+          <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-dark-secondary to-transparent"></div>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold my-1 text-lg leading-snug text-text-light font-playfair">素晴らしい映画2</div>
+          <div class="text-sm text-text-light opacity-60 mb-4 flex items-center">
+            <span class="mr-1 text-xs">🕒</span>上映時間: 105分
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="inline-block bg-dark text-primary text-xs py-1 px-2.5 font-medium border border-primary uppercase tracking-wider">上映中</div>
+            <div class="flex items-center text-sm text-primary font-semibold">
+              <span class="mr-1 text-xs">⭐</span>4.5
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 映画カード3 -->
+      <div class="movie-card">
+        <div class="h-64 bg-dark-secondary relative overflow-hidden bg-center bg-cover" style="background-image: url('https://via.placeholder.com/220x300')">
+          <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-dark-secondary to-transparent"></div>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold my-1 text-lg leading-snug text-text-light font-playfair">アクション映画タイトル</div>
+          <div class="text-sm text-text-light opacity-60 mb-4 flex items-center">
+            <span class="mr-1 text-xs">🕒</span>上映時間: 95分
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="inline-block bg-dark text-primary text-xs py-1 px-2.5 font-medium border border-primary uppercase tracking-wider">上映中</div>
+            <div class="flex items-center text-sm text-primary font-semibold">
+              <span class="mr-1 text-xs">⭐</span>4.2
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 映画カード4 -->
+      <div class="movie-card">
+        <div class="h-64 bg-dark-secondary relative overflow-hidden bg-center bg-cover" style="background-image: url('https://via.placeholder.com/220x300')">
+          <span class="tag bg-gradient-to-r from-yellow-500 to-yellow-300">人気上昇中</span>
+          <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-dark-secondary to-transparent"></div>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold my-1 text-lg leading-snug text-text-light font-playfair">ファンタジー大作</div>
+          <div class="text-sm text-text-light opacity-60 mb-4 flex items-center">
+            <span class="mr-1 text-xs">🕒</span>上映時間: 130分
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="inline-block bg-dark text-primary text-xs py-1 px-2.5 font-medium border border-primary uppercase tracking-wider">上映中</div>
+            <div class="flex items-center text-sm text-primary font-semibold">
+              <span class="mr-1 text-xs">⭐</span>4.9
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- その他4枚の映画カード -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+      <!-- 映画カード5 -->
+      <div class="movie-card">
+        <div class="h-64 bg-dark-secondary relative overflow-hidden bg-center bg-cover" style="background-image: url('https://via.placeholder.com/220x300')">
+          <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-dark-secondary to-transparent"></div>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold my-1 text-lg leading-snug text-text-light font-playfair">コメディ映画の傑作</div>
+          <div class="text-sm text-text-light opacity-60 mb-4 flex items-center">
+            <span class="mr-1 text-xs">🕒</span>上映時間: 110分
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="inline-block bg-dark text-primary text-xs py-1 px-2.5 font-medium border border-primary uppercase tracking-wider">上映中</div>
+            <div class="flex items-center text-sm text-primary font-semibold">
+              <span class="mr-1 text-xs">⭐</span>4.3
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 映画カード6 -->
+      <div class="movie-card">
+        <div class="h-64 bg-dark-secondary relative overflow-hidden bg-center bg-cover" style="background-image: url('https://via.placeholder.com/220x300')">
+          <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-dark-secondary to-transparent"></div>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold my-1 text-lg leading-snug text-text-light font-playfair">ドラマチックな物語</div>
+          <div class="text-sm text-text-light opacity-60 mb-4 flex items-center">
+            <span class="mr-1 text-xs">🕒</span>上映時間: 125分
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="inline-block bg-dark text-primary text-xs py-1 px-2.5 font-medium border border-primary uppercase tracking-wider">上映中</div>
+            <div class="flex items-center text-sm text-primary font-semibold">
+              <span class="mr-1 text-xs">⭐</span>4.7
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 映画カード7 -->
+      <div class="movie-card">
+        <div class="h-64 bg-dark-secondary relative overflow-hidden bg-center bg-cover" style="background-image: url('https://via.placeholder.com/220x300')">
+          <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-dark-secondary to-transparent"></div>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold my-1 text-lg leading-snug text-text-light font-playfair">SF冒険活劇</div>
+          <div class="text-sm text-text-light opacity-60 mb-4 flex items-center">
+            <span class="mr-1 text-xs">🕒</span>上映時間: 100分
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="inline-block bg-dark text-primary text-xs py-1 px-2.5 font-medium border border-primary uppercase tracking-wider">上映中</div>
+            <div class="flex items-center text-sm text-primary font-semibold">
+              <span class="mr-1 text-xs">⭐</span>4.4
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 映画カード8 -->
+      <div class="movie-card">
+        <div class="h-64 bg-dark-secondary relative overflow-hidden bg-center bg-cover" style="background-image: url('https://via.placeholder.com/220x300')">
+          <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-dark-secondary to-transparent"></div>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold my-1 text-lg leading-snug text-text-light font-playfair">ミステリースリラー</div>
+          <div class="text-sm text-text-light opacity-60 mb-4 flex items-center">
+            <span class="mr-1 text-xs">🕒</span>上映時間: 115分
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="inline-block bg-dark text-primary text-xs py-1 px-2.5 font-medium border border-primary uppercase tracking-wider">上映中</div>
+            <div class="flex items-center text-sm text-primary font-semibold">
+              <span class="mr-1 text-xs">⭐</span>4.6
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#" class="block w-48 bg-dark text-primary text-center py-3.5 mx-auto my-10 no-underline font-semibold text-sm transition-all duration-300 border border-primary uppercase tracking-wider hover:bg-primary hover:text-dark hover:shadow-lg">すべて見る</a>
+
+    <!-- キャンペーンバナー -->
+    <div class="h-48 bg-gradient-to-r from-dark to-dark-secondary my-16 overflow-hidden relative flex items-center justify-center text-text-light text-2xl font-bold shadow-xl border border-primary">
+      <div class="absolute w-64 h-64 bg-primary bg-opacity-5 rounded-full -top-32 -right-32"></div>
+      <div class="absolute w-48 h-48 bg-primary bg-opacity-5 rounded-full -bottom-24 -left-24"></div>
+      <div class="relative z-10 text-center font-playfair">
+        GOLD MEMBER 限定特典<br>
+        <span class="text-base opacity-90 font-normal">プレミアムラウンジ無料利用・シャンパンサービス・専用駐車場</span><br>
+        <button class="bg-primary text-dark border-none py-2.5 px-6 text-sm font-semibold mt-4 cursor-pointer transition-all duration-300 uppercase tracking-wider hover:bg-accent hover:scale-105 hover:shadow-lg">会員登録する</button>
+      </div>
+    </div>
+
+    <!-- COMING SOON -->
+    <div class="flex items-center justify-between my-16">
+      <h2 class="section-title">COMING SOON</h2>
+      <a href="#" class="text-primary font-semibold text-sm uppercase tracking-wider transition-all duration-300 border-b border-transparent pb-1 hover:text-accent hover:border-accent">すべて見る →</a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+      <!-- 公開予定映画カード1 -->
+      <div class="movie-card">
+        <div class="h-64 bg-dark-secondary relative overflow-hidden bg-center bg-cover" style="background-image: url('https://via.placeholder.com/220x300')">
+          <span class="tag bg-gradient-to-r from-primary to-accent">5月公開</span>
+          <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-dark-secondary to-transparent"></div>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold my-1 text-lg leading-snug text-text-light font-playfair">期待の新作タイトル</div>
+          <div class="text-sm text-text-light opacity-60 mb-4 flex items-center">
+            <span class="mr-1 text-xs">🕒</span>上映時間: 140分
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="inline-block bg-dark text-primary text-xs py-1 px-2.5 font-medium border border-primary uppercase tracking-wider">公開予定</div>
+            <div class="flex items-center text-sm text-primary font-semibold">
+              <span class="mr-1 text-xs">⭐</span>4.9
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 公開予定映画カード2 -->
+      <div class="movie-card">
+        <div class="h-64 bg-dark-secondary relative overflow-hidden bg-center bg-cover" style="background-image: url('https://via.placeholder.com/220x300')">
+          <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-dark-secondary to-transparent"></div>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold my-1 text-lg leading-snug text-text-light font-playfair">名監督最新作</div>
+          <div class="text-sm text-text-light opacity-60 mb-4 flex items-center">
+            <span class="mr-1 text-xs">🕒</span>上映時間: 135分
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="inline-block bg-dark text-primary text-xs py-1 px-2.5 font-medium border border-primary uppercase tracking-wider">公開予定</div>
+            <div class="flex items-center text-sm text-primary font-semibold">
+              <span class="mr-1 text-xs">⭐</span>4.7
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 公開予定映画カード3 -->
+      <div class="movie-card">
+        <div class="h-64 bg-dark-secondary relative overflow-hidden bg-center bg-cover" style="background-image: url('https://via.placeholder.com/220x300')">
+          <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-dark-secondary to-transparent"></div>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold my-1 text-lg leading-snug text-text-light font-playfair">期待のシリーズ最新作</div>
+          <div class="text-sm text-text-light opacity-60 mb-4 flex items-center">
+            <span class="mr-1 text-xs">🕒</span>上映時間: 150分
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="inline-block bg-dark text-primary text-xs py-1 px-2.5 font-medium border border-primary uppercase tracking-wider">公開予定</div>
+            <div class="flex items-center text-sm text-primary font-semibold">
+              <span class="mr-1 text-xs">⭐</span>4.8
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 公開予定映画カード4 -->
+      <div class="movie-card">
+        <div class="h-64 bg-dark-secondary relative overflow-hidden bg-center bg-cover" style="background-image: url('https://via.placeholder.com/220x300')">
+          <span class="tag bg-gradient-to-r from-yellow-500 to-yellow-300">注目作品</span>
+          <div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-dark-secondary to-transparent"></div>
+        </div>
+        <div class="p-5">
+          <div class="font-semibold my-1 text-lg leading-snug text-text-light font-playfair">話題の俳優主演作</div>
+          <div class="text-sm text-text-light opacity-60 mb-4 flex items-center">
+            <span class="mr-1 text-xs">🕒</span>上映時間: 120分
+          </div>
+          <div class="flex justify-between items-center">
+            <div class="inline-block bg-dark text-primary text-xs py-1 px-2.5 font-medium border border-primary uppercase tracking-wider">公開予定</div>
+            <div class="flex items-center text-sm text-primary font-semibold">
+              <span class="mr-1 text-xs">⭐</span>4.6
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- フッター -->
+  <footer class="bg-dark-secondary py-10 border-t border-primary border-opacity-20 text-sm">
+    <div class="max-w-screen-xl mx-auto px-[5%] grid grid-cols-2 sm:grid-cols-4 gap-6">
+      <div>
+        <h4 class="text-primary font-semibold mb-4 uppercase tracking-wider">HALシネマ</h4>
+        <p class="opacity-70 leading-relaxed">
+          名作とともに時代を超える体験を。<br>
+          HALシネマはあなたに最高の映画体験を提供します。
+        </p>
+      </div>
+      <div>
+        <h4 class="text-primary font-semibold mb-4 uppercase tracking-wider">リンク</h4>
+        <a href="#" class="footer-link">上映中作品</a>
+        <a href="#" class="footer-link">公開予定</a>
+        <a href="#" class="footer-link">料金案内</a>
+        <a href="#" class="footer-link">サービス</a>
+      </div>
+      <div>
+        <h4 class="text-primary font-semibold mb-4 uppercase tracking-wider">サポート</h4>
+        <a href="#" class="footer-link">お問い合わせ</a>
+        <a href="#" class="footer-link">プライバシーポリシー</a>
+        <a href="#" class="footer-link">利用規約</a>
+      </div>
+      <div>
+        <h4 class="text-primary font-semibold mb-4 uppercase tracking-wider">SNS</h4>
+        <a href="#" class="footer-link">Twitter</a>
+        <a href="#" class="footer-link">Instagram</a>
+        <a href="#" class="footer-link">Facebook</a>
+      </div>
+    </div>
+    <div class="text-center text-xs mt-10 opacity-50">&copy; 2025 HAL Cinema. All rights reserved.</div>
+  </footer>
+
+  <script>
+    // Simple slider functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Slider indicators
+      const indicators = document.querySelectorAll('.bottom-8 .w-10');
+      
+      // Add click event to each indicator
+      indicators.forEach((indicator, index) => {
+        indicator.addEventListener('click', () => {
+          // Remove active class from all indicators
+          indicators.forEach(ind => ind.classList.remove('active-slide'));
+          // Add active class to clicked indicator
+          indicator.classList.add('active-slide');
+          
+          // Here you would normally change the slide
+          console.log(`Slide ${index + 1} activated`);
+        });
+      });
+      
+      // Previous and Next buttons
+      const prevBtn = document.querySelector('.absolute.top-1/2.left-5');
+      const nextBtn = document.querySelector('.absolute.top-1/2.right-5');
+      
+      let currentSlide = 0;
+      
+      if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+          currentSlide = (currentSlide - 1 + indicators.length) % indicators.length;
+          updateSlider();
+        });
+        
+        nextBtn.addEventListener('click', () => {
+          currentSlide = (currentSlide + 1) % indicators.length;
+          updateSlider();
+        });
+      }
+      
+      function updateSlider() {
+        indicators.forEach(ind => ind.classList.remove('active-slide'));
+        indicators[currentSlide].classList.add('active-slide');
+        console.log(`Slide ${currentSlide + 1} activated`);
+      }
+    });
+  </script>
+</body>
 </html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>購入内容の確認 | HALシネマ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#D4AF37',
+            secondary: '#C0A030',
+            accent: '#FFD700',
+            dark: '#0A0A0A',
+            'dark-secondary': '#1A1A1A',
+            'text-light': '#E0E0E0',
+          },
+          fontFamily: {
+            playfair: ['Playfair Display', 'serif'],
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-dark text-text-light font-poppins min-h-screen flex flex-col">
+
+  <!-- ヘッダー -->
+  <header class="bg-dark bg-opacity-98 text-text-light px-[5%] h-20 flex justify-between items-center sticky top-0 z-40 shadow-md border-b border-primary border-opacity-30">
+    <div class="font-playfair text-2xl font-bold tracking-wide gold-gradient flex items-center">
+      <span class="text-primary mr-2.5">🎬</span>
+      HALシネマ
+    </div>
+    <nav class="flex gap-8">
+      <a href="#" class="nav-link">上映中作品</a>
+      <a href="#" class="nav-link">公開予定</a>
+      <a href="#" class="nav-link">料金案内</a>
+      <a href="#" class="nav-link">マイチケット</a>
+    </nav>
+  </header>
+
+  <!-- メイン -->
+  <main class="flex-grow max-w-screen-md mx-auto px-[5%] py-20">
+    <h1 class="text-3xl md:text-4xl font-playfair font-bold text-primary mb-10 text-center">購入内容のご確認</h1>
+
+    <div class="bg-dark-secondary border border-primary border-opacity-20 p-8 rounded-2xl shadow-lg space-y-4">
+      <p class="text-lg">🎟️ <strong>映画タイトル：</strong>すばらしい映画のタイトル</p>
+      <p class="text-lg">📍 <strong>劇場：</strong>東京シネマ</p>
+      <p class="text-lg">🗓️ <strong>日時：</strong>2025年5月20日（火）18:30〜</p>
+      <p class="text-lg">🪑 <strong>座席：</strong>A列 12番</p>
+      <p class="text-lg">💴 <strong>料金：</strong>¥1,800（税込）</p>
+    </div>
+
+    <div class="flex justify-center gap-6 mt-10 flex-wrap">
+      <button onclick="location.href='movie-detail.html'" class="px-6 py-3 border border-primary text-primary rounded-full font-semibold hover:bg-dark-secondary transition">
+        戻る
+      </button>
+      <button onclick="location.href='ticket-complete.html'" class="px-6 py-3 bg-primary text-black rounded-full font-bold hover:bg-accent transition">
+        購入を確定する
+      </button>
+    </div>
+  </main>
+
+  <!-- フッター -->
+  <footer class="bg-dark-secondary py-10 text-center text-sm text-gray-400 border-t border-primary border-opacity-20">
+    &copy; 2025 HAL Cinema. All rights reserved.
+  </footer>
+
+</body>
+</html>

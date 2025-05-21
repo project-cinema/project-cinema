@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>購入履歴 | HALシネマ</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#D4AF37',
+            secondary: '#C0A030',
+            accent: '#FFD700',
+            dark: '#0A0A0A',
+            'dark-secondary': '#1A1A1A',
+            'text-light': '#E0E0E0',
+          },
+          fontFamily: {
+            playfair: ['Playfair Display', 'serif'],
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-dark text-text-light font-poppins min-h-screen flex flex-col">
+
+  <!-- ヘッダー -->
+  <header class="bg-dark bg-opacity-98 text-text-light px-[5%] h-20 flex justify-between items-center sticky top-0 z-40 shadow-md border-b border-primary border-opacity-30">
+    <div class="font-playfair text-2xl font-bold tracking-wide gold-gradient flex items-center">
+      <span class="text-primary mr-2.5">🎬</span>
+      HALシネマ
+    </div>
+    <nav class="flex gap-8">
+      <a href="#" class="nav-link">上映中作品</a>
+      <a href="#" class="nav-link">公開予定</a>
+      <a href="#" class="nav-link">マイチケット</a>
+      <a href="#" class="nav-link">購入履歴</a>
+    </nav>
+  </header>
+
+  <!-- メイン -->
+  <main class="flex-grow max-w-screen-lg mx-auto px-[5%] py-16">
+    <h1 class="text-3xl md:text-4xl font-playfair font-bold text-primary mb-10">購入履歴</h1>
+
+    <div class="space-y-6">
+      <!-- 購入履歴カード -->
+      <div class="bg-dark-secondary border border-primary border-opacity-20 p-6 rounded-xl shadow-lg">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+          <div>
+            <h2 class="text-xl font-semibold text-primary mb-1">すばらしい映画のタイトル</h2>
+            <p class="text-sm">📍 東京シネマ</p>
+            <p class="text-sm">🗓️ 2025年5月20日（火）18:30〜</p>
+            <p class="text-sm">🪑 A列 12番</p>
+            <p class="text-sm">💴 ¥1,800（税込）</p>
+          </div>
+          <button class="mt-2 sm:mt-0 px-5 py-2 bg-primary text-black rounded-full font-semibold hover:bg-accent transition">
+            詳細を見る
+          </button>
+        </div>
+      </div>
+
+      <!-- 2つ目の履歴 -->
+      <div class="bg-dark-secondary border border-primary border-opacity-20 p-6 rounded-xl shadow-lg">
+        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+          <div>
+            <h2 class="text-xl font-semibold text-primary mb-1">未来都市の冒険</h2>
+            <p class="text-sm">📍 大阪シネマ</p>
+            <p class="text-sm">🗓️ 2025年4月15日（月）14:00〜</p>
+            <p class="text-sm">🪑 B列 7番</p>
+            <p class="text-sm">💴 ¥1,500（税込）</p>
+          </div>
+          <button class="mt-2 sm:mt-0 px-5 py-2 bg-primary text-black rounded-full font-semibold hover:bg-accent transition">
+            領収書を表示
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- フッター -->
+  <footer class="bg-dark-secondary py-10 text-center text-sm text-gray-400 border-t border-primary border-opacity-20">
+    &copy; 2025 HAL Cinema. All rights reserved.
+  </footer>
+
+</body>
+</html>
