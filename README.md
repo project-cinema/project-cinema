@@ -6,4 +6,4 @@
 
 ## run
 * run `server`
-* run `ProjectCinemaApplication`
+* run `dev`
