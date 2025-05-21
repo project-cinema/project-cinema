@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>マイページ - HALシネマ</title>
+        <link rel="stylesheet" href="/css/mypage.css">
+    </head>
+    <body>
+        <!-- ヘッダー -->
+        <header>
+            <div class="logo">
+                <span class="logo-icon">📽️</span>
+                HALシネマ
+            </div>
+            <nav>
+                <a href="#" class="nav-link">ホーム</a>
+                <a href="#" class="nav-link active">マイページ</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- プロフィールセクション -->
+            <div class="profile-section">
+                <div class="profile-content">
+                    <div class="avatar">
+                        YT
+                    </div>
+                    <div>
+                        <h1 class="user-name">山田 太郎様</h1>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 予約チケット -->
+            <h2 class="section-title mb-6">予約済みチケット</h2>
+            <div class="ticket-list">
+                <div class="ticket-card">
+                    <div class="ticket-header">
+                        <div>
+                            <h3 class="movie-title">すばらしい映画のタイトル</h3>
+                            <div class="show-time">2025年5月1日(水) 14:00～</div>
+                        </div>
+                        <button class="ticket-button">
+                            チケット表示
+                        </button>
+                    </div>
+                    <div class="ticket-details">
+                        <div>
+                            <span class="detail-label">座席:</span>
+                            <span class="detail-value">G-15, G-16</span>
+                        </div>
+                        <div>
+                            <span class="detail-label">スクリーン:</span>
+                            <span class="detail-value">SCREEN 1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 視聴履歴 -->
+            <h2 class="section-title mb-6">視聴履歴</h2>
+            <div class="history-grid">
+                <div class="history-card">
+                    <div class="movie-image" style="background-image: url('https://via.placeholder.com/200x300')"></div>
+                    <div class="movie-info">
+                        <h3 class="movie-title">アクション映画タイトル</h3>
+                        <div class="watch-date">視聴日: 2025/4/15</div>
+                    </div>
+                </div>
+                <!-- 他の視聴履歴カード -->
+            </div>
+
+            <!-- 設定 -->
+            <h2 class="section-title mb-6">ユーザー設定</h2>
+            <div class="space-y-4">
+                <button id="edit-profile-btn" class="text-white w-full bg-dark-secondary p-4 rounded-lg text-left border border-primary border-opacity-20 hover:border-primary transition-colors">
+                    プロフィール編集
+                </button>
+                <button id="change-password-btn" class="text-white w-full bg-dark-secondary p-4 rounded-lg text-left border border-primary border-opacity-20 hover:border-primary transition-colors">
+                    パスワード設定
+                </button>
+                <button class="text-white w-full bg-dark-secondary p-4 rounded-lg text-left border border-primary border-opacity-20 hover:border-primary transition-colors">
+                    通知設定
+                </button>
+                <button class="text-white w-full bg-dark-secondary p-4 rounded-lg text-left border border-primary border-opacity-20 hover:border-primary transition-colors">
+                    お支払い方法
+                </button>
+            </div>
+        </main>
+
+        <!-- プロフィール編集モーダル -->
+        <div id="edit-profile-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>プロフィール編集</h2>
+                <form id="edit-profile-form">
+                    <div class="form-group">
+                        <label for="phone">電話番号</label>
+                        <input type="tel" id="phone" name="phone" placeholder="090-1234-5678" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">メールアドレス</label>
+                        <input type="email" id="email" name="email" placeholder="example@halcinema.com" required>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="cancel-btn">キャンセル</button>
+                        <button type="submit" class="submit-btn">保存する</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- パスワード設定モーダル -->
+        <div id="change-password-modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>パスワード設定</h2>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">現在のパスワード</label>
+                        <input type="password" id="current-password" name="currentPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">新しいパスワード</label>
+                        <input type="password" id="new-password" name="newPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">新しいパスワード（確認）</label>
+                        <input type="password" id="confirm-password" name="confirmPassword" required>
+                    </div>
+                    <div class="button-group">
+                        <button type="button" class="cancel-btn">キャンセル</button>
+                        <button type="submit" class="submit-btn">設定する</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <!-- フッター -->
+        <footer class="bg-dark-secondary py-10 border-t border-primary border-opacity-20 mt-16">
+            <div class="max-w-screen-xl mx-auto px-[5%] text-center text-sm opacity-70">
+                &copy; 2025 HALシネマ. All rights reserved.
+            </div>
+        </footer>
+
+        <script>
+            // モーダル操作のためのJavaScript
+            document.addEventListener('DOMContentLoaded', function() {
+                // モーダル要素の取得
+                const editProfileModal = document.getElementById('edit-profile-modal');
+                const changePasswordModal = document.getElementById('change-password-modal');
+
+                // ボタン要素の取得
+                const editProfileBtn = document.getElementById('edit-profile-btn');
+                const changePasswordBtn = document.getElementById('change-password-btn');
+
+                // 閉じるボタン要素の取得
+                const closeBtns = document.getElementsByClassName('close');
+                const cancelBtns = document.getElementsByClassName('cancel-btn');
+
+                // 会員情報変更ボタンクリックでモーダルを表示
+                editProfileBtn.addEventListener('click', function() {
+                    editProfileModal.style.display = 'block';
+                });
+
+                // パスワード変更ボタンクリックでモーダルを表示
+                changePasswordBtn.addEventListener('click', function() {
+                    changePasswordModal.style.display = 'block';
+                });
+
+                // 閉じるボタンクリックでモーダルを非表示
+                Array.from(closeBtns).forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        editProfileModal.style.display = 'none';
+                        changePasswordModal.style.display = 'none';
+                    });
+                });
+
+                // キャンセルボタンクリックでモーダルを非表示
+                Array.from(cancelBtns).forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        editProfileModal.style.display = 'none';
+                        changePasswordModal.style.display = 'none';
+                    });
+                });
+
+                // モーダル外クリックでモーダルを非表示
+                window.addEventListener('click', function(event) {
+                    if (event.target == editProfileModal) {
+                        editProfileModal.style.display = 'none';
+                    }
+                    if (event.target == changePasswordModal) {
+                        changePasswordModal.style.display = 'none';
+                    }
+                });
+
+                // フォーム送信処理
+                document.getElementById('edit-profile-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // ここでAPI呼び出しやフォームデータの処理を行う
+                    alert('プロフィールが更新されました');
+                    editProfileModal.style.display = 'none';
+                });
+
+                document.getElementById('change-password-form').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // パスワード確認チェック
+                    const newPassword = document.getElementById('new-password').value;
+                    const confirmPassword = document.getElementById('confirm-password').value;
+
+                    if (newPassword !== confirmPassword) {
+                        alert('新しいパスワードと確認用パスワードが一致しません');
+                        return;
+                    }
+
+                    // ここでAPI呼び出しやフォームデータの処理を行う
+                    alert('パスワードが設定されました');
+                    changePasswordModal.style.display = 'none';
+                });
+            });
+        </script>
+    </body>
+</html>
